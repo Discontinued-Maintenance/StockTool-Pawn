@@ -1,8 +1,8 @@
 import tkinter as tk
-import math
+import math as math
 window = tk.Tk()
 window.title('StockTool-Pawn')
-window.geometry('300x300')
+window.geometry('500x300')
 
 def _volume(event):
     try:
@@ -13,7 +13,7 @@ def _volume(event):
         single = float(single_entry.get())
     except:
         single = 0
-    volume = single*0.015
+    volume = single/0.015
     formula = (buy*1000) + (buy*0.001425)
     try:
         sheets_number_formula = math.floor(volume/formula)
@@ -32,10 +32,10 @@ def _buy_estimated_cost_text(event):
         single = float(single_entry.get())
     except:
         single = 0
-    volume = single*0.015
-    formula = (buy*1000) + (buy*0.001425)
+    volume = single/0.015
+    formula = ((buy*1000) + (buy*1000*0.001425))/1000
     try:
-        sheets_number_formula = math.floor(volume/formula)
+        sheets_number_formula = math.floor(volume/formula/1000)
     except:
         sheets_number_formula = 0
     result = '預估成本：{}'.format(formula)
@@ -52,7 +52,7 @@ def _sell_text(event):
     except:
         buy = 0
     sell = buy-(buy*(stoploss/100))
-    formula = (sell *1000)+(sell*0.001425)+(sell*0.003)
+    formula = ((sell *1000)+(sell*1000*0.001425)+(sell*1000*0.003))/1000
     result = '賣：{} '.format(str(sell))
     result1 = '預估成本：{} '.format(str(formula))
     return _sell_text.set(result),_sell_estimated_cost_text.set(result1)
@@ -61,7 +61,7 @@ def _sell_text(event):
 first_row_frame = tk.Frame(window)
 first_row_frame.pack(side=tk.TOP)
 
-single_label = tk.Label(first_row_frame, text='本金：')
+single_label = tk.Label(first_row_frame, text='單筆：')
 single_label.pack(side=tk.LEFT)
 single_entry = tk.Entry(first_row_frame)
 single_entry.bind('<KeyRelease>', _volume)
