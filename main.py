@@ -6,11 +6,11 @@ window.geometry('300x300')
 
 def _volume(event):
     try:
-        buy = int(buy_entry.get())
+        buy = float(buy_entry.get())
     except:
         buy = 0
     try:
-        single = int(single_entry.get())
+        single = float(single_entry.get())
     except:
         single = 0
     volume = single*0.015
@@ -25,11 +25,11 @@ def _volume(event):
 
 def _buy_estimated_cost_text(event):
     try:
-        buy = int(buy_entry.get())
+        buy = float(buy_entry.get())
     except:
         buy = 0
     try:
-        single = int(single_entry.get())
+        single = float(single_entry.get())
     except:
         single = 0
     volume = single*0.015
@@ -44,11 +44,11 @@ def _buy_estimated_cost_text(event):
 
 def _sell_text(event):
     try:
-        stoploss = int(stop_loss_entry.get())
+        stoploss = float(stop_loss_entry.get())
     except:
         stoploss = 0
     try:
-        buy = int(buy_entry.get())
+        buy = float(buy_entry.get())
     except:
         buy = 0
     sell = buy-(buy*(stoploss/100))
