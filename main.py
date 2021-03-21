@@ -1,7 +1,7 @@
 import tkinter as tk
 import math as math
 window = tk.Tk()
-window.title('StockTool-Pawn')
+window.title('當沖')
 window.geometry('500x300')
 
 def _volume(event):
