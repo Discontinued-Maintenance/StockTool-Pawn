@@ -6,6 +6,10 @@ window.geometry('500x300')
 
 def _volume(event):
     try:
+        CheckVar = CheckVar1.get()
+    except:
+        CheckVar = 0
+    try:
         buy = float(buy_entry.get())
     except:
         buy = 0
@@ -13,18 +17,33 @@ def _volume(event):
         single = float(single_entry.get())
     except:
         single = 0
-    volume = single/0.015
-    formula = (buy*1000) + (buy*0.001425)
-    try:
-        sheets_number_formula = math.floor(volume/formula)
-    except:
-        sheets_number_formula = 0
-    result = '成交量：{}'.format(volume)
-    result2 = '張數：{}'.format(sheets_number_formula)
-    return _volume_text.set(result),_sheets_number_text.set(result2)
+    if(CheckVar == 1):
+        volume = single/0.015
+        formula = ((buy*1000) + (buy*1000*0.001425) + (buy*0.003*1000))/1000
+        try:
+            sheets_number_formula = math.floor(volume/formula/1000)
+        except:
+            sheets_number_formula = 0
+        result = '成交量：{}'.format(volume)
+        result2 = '張數：{}'.format(sheets_number_formula)
+        return _volume_text.set(result),_sheets_number_text.set(result2)
+    elif(CheckVar == 0):
+        volume = single/0.015
+        formula = ((buy*1000) + (buy*1000*0.001425))/1000
+        try:
+            sheets_number_formula = math.floor(volume/formula/1000)
+        except:
+            sheets_number_formula = 0
+        result = '成交量：{}'.format(volume)
+        result2 = '張數：{}'.format(sheets_number_formula)
+        return _volume_text.set(result),_sheets_number_text.set(result2)
 
 def _buy_estimated_cost_text(event):
     try:
+        CheckVar = CheckVar1.get()
+    except:
+        CheckVar = 0
+    try:
         buy = float(buy_entry.get())
     except:
         buy = 0
@@ -32,17 +51,33 @@ def _buy_estimated_cost_text(event):
         single = float(single_entry.get())
     except:
         single = 0
-    volume = single/0.015
-    formula = ((buy*1000) + (buy*1000*0.001425))/1000
-    try:
-        sheets_number_formula = math.floor(volume/formula/1000)
-    except:
-        sheets_number_formula = 0
-    result = '預估成本：{}'.format(formula)
-    result2 = '張數：{}'.format(sheets_number_formula)
-    return _buy_estimated_cost_text.set(result),_sheets_number_text.set(result2)
+    
+    if(CheckVar == 1):
+        volume = single/0.015
+        formula = ((buy*1000) + (buy*1000*0.001425) + (buy*0.003*1000))/1000
+        try:
+            sheets_number_formula = math.floor(volume/formula/1000)
+        except:
+            sheets_number_formula = 0
+        result = '預估成本：{}'.format(formula)
+        result2 = '張數：{}'.format(sheets_number_formula)
+        return _buy_estimated_cost_text.set(result),_sheets_number_text.set(result2)
+    elif(CheckVar == 0):
+        volume = single/0.015
+        formula = ((buy*1000) + (buy*1000*0.001425))/1000
+        try:
+            sheets_number_formula = math.floor(volume/formula/1000)
+        except:
+            sheets_number_formula = 0
+        result = '預估成本：{}'.format(formula)
+        result2 = '張數：{}'.format(sheets_number_formula)
+        return _buy_estimated_cost_text.set(result),_sheets_number_text.set(result2)
 
 def _sell_text(event):
+    try:
+        CheckVar = CheckVar1.get()
+    except:
+        CheckVar = 0
     try:
         stoploss = float(stop_loss_entry.get())
     except:
@@ -51,15 +86,35 @@ def _sell_text(event):
         buy = float(buy_entry.get())
     except:
         buy = 0
-    sell = buy-(buy*(stoploss/100))
-    formula = ((sell *1000)+(sell*1000*0.001425)+(sell*1000*0.003))/1000
-    result = '賣：{} '.format(str(sell))
-    result1 = '預估成本：{} '.format(str(formula))
-    return _sell_text.set(result),_sell_estimated_cost_text.set(result1)
+    if(CheckVar == 1):
+        sell = buy+(buy*(stoploss/100))
+        formula = ((sell *1000)+(sell*1000*0.001425))/1000
+        result = '買：{} '.format(str(sell))
+        result1 = '預估成本：{} '.format(str(formula))
+        return _sell_text.set(result),_sell_estimated_cost_text.set(result1)
+    elif(CheckVar == 0):
+        sell = buy-(buy*(stoploss/100))
+        formula = ((sell *1000)+(sell*1000*0.001425)+(sell*1000*0.003))/1000
+        result = '賣：{} '.format(str(sell))
+        result1 = '預估成本：{} '.format(str(formula))
+        return _sell_text.set(result),_sell_estimated_cost_text.set(result1)
 
+#def Change():
+#    try:
+#        CheckVar = CheckVar1.get()
+#    except:
+#        CheckVar = 0
+#    if (CheckVar == 1):
+#        buy_label['text'] = "賣"
+#    elif(CheckVar == 0):
+#        buy_label['text'] = "買"
         
 first_row_frame = tk.Frame(window)
 first_row_frame.pack(side=tk.TOP)
+
+CheckVar1 = tk.IntVar()
+checkbox = tk.Checkbutton(first_row_frame, text='空',variable=CheckVar1, onvalue=1, offvalue=0,command=Change)
+checkbox.pack()
 
 single_label = tk.Label(first_row_frame, text='單筆：')
 single_label.pack(side=tk.LEFT)
