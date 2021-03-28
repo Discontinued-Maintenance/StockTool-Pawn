@@ -113,7 +113,7 @@ first_row_frame = tk.Frame(window)
 first_row_frame.pack(side=tk.TOP)
 
 CheckVar1 = tk.IntVar()
-checkbox = tk.Checkbutton(first_row_frame, text='空',variable=CheckVar1, onvalue=1, offvalue=0,command=Change)
+checkbox = tk.Checkbutton(first_row_frame, text='空',variable=CheckVar1, onvalue=1, offvalue=0)#,command=Change
 checkbox.pack()
 
 single_label = tk.Label(first_row_frame, text='單筆：')
