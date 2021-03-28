@@ -99,21 +99,21 @@ def _sell_text(event):
         result1 = '預估成本：{} '.format(str(formula))
         return _sell_text.set(result),_sell_estimated_cost_text.set(result1)
 
-#def Change():
-#    try:
-#        CheckVar = CheckVar1.get()
-#    except:
-#        CheckVar = 0
-#    if (CheckVar == 1):
-#        buy_label['text'] = "賣"
-#    elif(CheckVar == 0):
-#        buy_label['text'] = "買"
+def Change():
+    try:
+        CheckVar = CheckVar1.get()
+    except:
+        CheckVar = 0
+    if (CheckVar == 1):
+        buy_label['text'] = "賣："
+    elif(CheckVar == 0):
+        buy_label['text'] = "買："
         
 first_row_frame = tk.Frame(window)
 first_row_frame.pack(side=tk.TOP)
 
 CheckVar1 = tk.IntVar()
-checkbox = tk.Checkbutton(first_row_frame, text='空',variable=CheckVar1, onvalue=1, offvalue=0)#,command=Change
+checkbox = tk.Checkbutton(first_row_frame, text='空',variable=CheckVar1, onvalue=1, offvalue=0,command=Change)#
 checkbox.pack()
 
 single_label = tk.Label(first_row_frame, text='單筆：')
