@@ -61,7 +61,16 @@ def _buy_estimated_cost_text(event):
             sheets_number_formula = 0
         result = '預估成本：{}'.format(formula)
         result2 = '張數：{}'.format(sheets_number_formula)
-        return _buy_estimated_cost_text.set(result),_sheets_number_text.set(result2)
+        try:
+            stoploss = float(stop_loss_entry.get())
+        except:
+            stoploss = 0
+        sell = buy+(buy*(stoploss/100))
+        formula1 = ((sell *1000)+(sell*1000*0.001425))/1000
+        result3 = '買：{} '.format(str(sell))
+        result4 = '預估成本：{} '.format(str(formula1))
+        
+        return _buy_estimated_cost_text.set(result),_sheets_number_text.set(result2),_sell_text.set(result3),_sell_estimated_cost_text.set(result4)
     elif(CheckVar == 0):
         volume = single/0.015
         formula = ((buy*1000) + (buy*1000*0.001425))/1000
@@ -71,7 +80,16 @@ def _buy_estimated_cost_text(event):
             sheets_number_formula = 0
         result = '預估成本：{}'.format(formula)
         result2 = '張數：{}'.format(sheets_number_formula)
-        return _buy_estimated_cost_text.set(result),_sheets_number_text.set(result2)
+        try:
+            stoploss = float(stop_loss_entry.get())
+        except:
+            stoploss = 0
+        sell = buy-(buy*(stoploss/100))
+        formula1 = ((sell *1000)+(sell*1000*0.001425)+(sell*1000*0.003))/1000
+        result3 = '賣：{} '.format(str(sell))
+        result4 = '預估成本：{} '.format(str(formula1))
+        
+        return _buy_estimated_cost_text.set(result),_sheets_number_text.set(result2),_sell_text.set(result3),_sell_estimated_cost_text.set(result4)
 
 def _sell_text(event):
     try:
